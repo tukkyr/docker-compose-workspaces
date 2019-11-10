@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  aws-cli:
+    build:
+      context: .
+    init: true
+    volumes:
+      - $HOME/.aws:/root/.aws
+      - history-vol:/history
+      - environment-vol:/root/environment
+
+volumes:
+  history-vol:
+  environment-vol:

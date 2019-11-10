@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  golang-vim:
+    build:
+      context: .
+    init: true
+    volumes:
+      - go-app:/app
+      - history-vol:/history 
+    environment:
+      - HISTFILE=/history/.history
+
+volumes:
+  go-app:
+  history-vol:
