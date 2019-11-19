@@ -66,7 +66,10 @@ set spell
 set autowrite
 
 " set ts=4 sw=4 noet
-set ts=2 sw=2 et
+set ts=2 sw=2 sts=2 et
+
+set list
+set listchars=tab:>-,trail:~,eol:$,space:_
 
 set backspace=indent,eol,start
 
