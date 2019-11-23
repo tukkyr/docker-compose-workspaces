@@ -1,6 +1,6 @@
 FROM node:buster
 
-RUN apt-get update && apt-get install -y isomd5sum python3 python3-pip python3-venv git vim curl jq gettext groff && rm -rf /var/lib/apt/lists/* && rm -rf /var/lib/apt/cache/*
+RUN apt-get update && apt-get install -y git vim curl jq groff && rm -rf /var/lib/apt/lists/* && rm -rf /var/lib/apt/cache/*
 
 RUN curl -o ${HOME}/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh \
  && mkdir -p ${HOME}/.vim/autoload && curl -o ${HOME}/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -35,16 +35,14 @@ RUN set -x \
  && echo "$(curl -s https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest.md5) /usr/local/bin/ecs-cli" | md5sum -c - \
  && chmod +x /usr/local/bin/ecs-cli
 
-RUN pip3 install awscli \
- && echo "complete -C aws_completer aws" | tee -a ${HOME}/.bashrc
-
-RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb" \
- && dpkg -i session-manager-plugin.deb \
- && rm session-manager-plugin.deb
+RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" \
+ && unzip awscli-bundle.zip \
+ && ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws \
+ && rm -rf awscli-bundle awscli-bundle.zip
 
 RUN npm install -g typescript \
  && npm install -g aws-cdk
 
-WORKDIR /root/environment
+WORKDIR /app
 
 CMD ["sh", "-c", "while sleep 3600; do :; done"]

@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  typescript:
+    build:
+      context: .
+    init: true
+    volumes:
+      - $HOME/.aws:/root/.aws
+      - history-vol:/history
+
+volumes:
+  history-vol:
