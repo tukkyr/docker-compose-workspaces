@@ -101,8 +101,8 @@ autocmd FileType go nmap <Leader>i <Plug>(go-describe)
 autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
 
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-autocmd BufNewFile,BufRead *.md setlocal expandtab tabstop=2 shiftwidth=2
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 sts=4
+autocmd BufNewFile,BufRead *.md setlocal expandtab tabstop=2 shiftwidth=2 sts=2
 
 let g:go_auto_type_info = 1
 let g:go_list_type = "quickfix"
@@ -111,7 +111,7 @@ let g:go_code_completion_enabled = 1
 let g:go_def_mapping_enabled = 1
 let g:go_def_keywordprg_enable = 0
 let g:go_template_autocreate = 0
-let g:go_auto_sameids = 1
+" let g:go_auto_sameids = 1
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 

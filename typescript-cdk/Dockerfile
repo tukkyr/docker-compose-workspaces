@@ -28,7 +28,9 @@ Plug 'VundleVim/Vundle.vim'\n\n\
 call plug#end()\n\
 filetype plugin indent on\n\
 syntax enable \n\n\
-set st=4 ts=4 sw=4" | tee -a ${HOME}/.vimrc
+set st=2 ts=2 sw=2 sts=2\n\
+set list\n\
+set listchars=eol:$,tab:>-,space:_,trail:~" | tee -a ${HOME}/.vimrc
 
 RUN set -x \
  && curl -o /usr/local/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest \
