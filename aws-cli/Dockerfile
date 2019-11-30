@@ -21,15 +21,6 @@ GIT_PS1_SHOWUNTRACKEDFILES=1\n\
 GIT_PS1_SHOWSTASHSTATE=1\n\
 PS1='\[\e[33m\]\D{%H:%M:%S}\[\e[m\] \[\e[36m\]\h:\W\[\e[m\] \[\e[1;32m\]\$(__git_ps1 \"< %s > \")\[\e[m\]\$ '" | tee -a ${HOME}/.bashrc
 
-RUN echo "set nocompatible\n\
-filetype off\n\n\
-call plug#begin('~/.vim/plugged')\n\n\
-Plug 'VundleVim/Vundle.vim'\n\n\
-call plug#end()\n\
-filetype plugin indent on\n\
-syntax enable \n\n\
-set st=4 ts=4 sw=4" | tee -a ${HOME}/.vimrc
-
 RUN set -x \
  && curl -o /usr/local/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest \
  && echo "$(curl -s https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest.md5) /usr/local/bin/ecs-cli" | md5sum -c - \
@@ -44,6 +35,39 @@ RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubunt
 
 RUN npm install -g typescript \
  && npm install -g aws-cdk
+
+RUN apt-get update \
+ && apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg2 \
+    software-properties-common \
+ && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
+ && apt-key fingerprint 0EBFCD88 \
+ &&  add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/debian \
+   $(lsb_release -cs) \
+   stable" \
+ && apt-get update \
+ && apt-get install -y docker-ce docker-ce-cli containerd.io \
+ # && usermod -aG docker your-user \
+ && rm -rf /var/lib/apt/cache/*
+
+
+RUN echo "set nocompatible\n\
+filetype off\n\n\
+call plug#begin('~/.vim/plugged')\n\n\
+Plug 'VundleVim/Vundle.vim'\n\
+Plug 'altercation/vim-colors-solarized'\n\n\
+call plug#end()\n\
+filetype plugin indent on\n\
+syntax enable\n\n\
+set background=dark\n\
+colorscheme solarized\n\
+set st=2 ts=2 sw=2 sts=2\n\
+set list \n\
+set listchars=tab:>-,trail:$" | tee -a ${HOME}/.vimrc
 
 WORKDIR /root/environment
 

@@ -15,6 +15,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'enricobacis/vim-airline-clock'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'fatih/vim-go'
+Plug 'fatih/molokai'
 Plug 'cohama/lexima.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 
@@ -37,6 +38,9 @@ if &term == "screen"
    set notermguicolors
  endif
 endif
+
+let g:molokai_original = 1
+colorscheme molokai
 
 " let g:airline_powerline_fonts = 1
 
@@ -69,7 +73,7 @@ set autowrite
 set ts=2 sw=2 sts=2 et
 
 set list
-set listchars=tab:>-,trail:~,eol:$,space:_
+set listchars=tab:>-,trail:$
 
 set backspace=indent,eol,start
 
@@ -97,12 +101,13 @@ autocmd FileType go nmap <leader>r <Plug>(go-run)
 autocmd FileType go nmap <leader>t <Plug>(go-test)
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 autocmd FileType go nmap <Leader>k <Plug>(go-doc)
-autocmd FileType go nmap <Leader>i <Plug>(go-describe)
+autocmd FileType go nmap <Leader>d <Plug>(go-describe)
+autocmd Filetype go nmap <Leader>i <Plug>(go-implements)
 autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
 
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-autocmd BufNewFile,BufRead *.md setlocal expandtab tabstop=2 shiftwidth=2
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd BufNewFile,BufRead *.md setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 let g:go_auto_type_info = 1
 let g:go_list_type = "quickfix"
@@ -111,16 +116,18 @@ let g:go_code_completion_enabled = 1
 let g:go_def_mapping_enabled = 1
 let g:go_def_keywordprg_enable = 0
 let g:go_template_autocreate = 0
-let g:go_auto_sameids = 1
+let g:go_auto_sameids = 0
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
 let g:go_highlight_functions = 1
 
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-let g:go_metalinter_autosave = 1
+" let g:go_metalinter_autosave = 1
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
