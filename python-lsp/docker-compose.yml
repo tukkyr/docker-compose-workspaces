@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  python-vim:
+    build:
+      context: .
+    init: true
+    volumes:
+      - python-app:/app
+      - history-vol:/history 
+    environment:
+      - HISTFILE=/history/.history
+
+volumes:
+  python-app:
+  history-vol:
