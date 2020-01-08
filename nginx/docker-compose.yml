@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  nginx-test:
+    build:
+      context: .
+    init: true
+    ports:
+      - 8080:80

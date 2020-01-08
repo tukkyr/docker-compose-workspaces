@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  crt-test:
+    build:
+      context: .
+    init: true
+    volumes:
+      - crt-tmp:/crt
+      - history-tmp:/history
+    environment:
+      - HISTFILE-/history/.history
+
+volumes:
+  crt-tmp:
+  history-tmp:

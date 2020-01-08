@@ -40,7 +40,7 @@ if &term == "screen"
 endif
 
 let g:molokai_original = 1
-colorscheme molokai
+silent! colorscheme molokai
 
 " let g:airline_powerline_fonts = 1
 

@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  k8s-dev:
+    build:
+      context: .
+    init: true
+    volumes:
+      - gcloud-vol:/root/.config/gcloud
+      - k8s-vol:/k8s
+      - history-vol:/history 
+    environment:
+      - HISTFILE=/history/.history
+
+volumes:
+  gcloud-vol:
+  k8s-vol:
+  history-vol:
