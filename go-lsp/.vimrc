@@ -133,3 +133,5 @@ let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 set updatetime=300
+
+autocmd QuickFixCmdPost *grep* cwindow
