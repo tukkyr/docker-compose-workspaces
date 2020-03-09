@@ -16,8 +16,8 @@ Plug 'enricobacis/vim-airline-clock'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'fatih/vim-go'
 Plug 'fatih/molokai'
-Plug 'cohama/lexima.vim'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mattn/emmet-vim'
 
 call plug#end()
 filetype plugin indent on
@@ -26,6 +26,7 @@ syntax enable
 set nrformats=
 set encoding=utf-8
 set nowrap
+set foldlevel=100
 
 if (has("termguicolors"))
   set termguicolors
@@ -41,6 +42,7 @@ endif
 
 let g:molokai_original = 1
 silent! colorscheme molokai
+hi Comment guifg=#A1A1A1
 
 " let g:airline_powerline_fonts = 1
 
@@ -62,6 +64,9 @@ inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
+
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
 
 " set hls
 set number
