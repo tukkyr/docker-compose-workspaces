@@ -140,3 +140,6 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 set updatetime=300
 
 autocmd QuickFixCmdPost *grep* cwindow
+
+runtime macros/matchit.vim
+let b:match_words = "if:endif,foreach:endforeach,\<begin\>:\<end\>"
