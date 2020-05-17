@@ -26,7 +26,8 @@ syntax enable
 set nrformats=
 set encoding=utf-8
 set nowrap
-set foldlevel=100
+set foldmethod=indent
+set foldlevel=5
 
 if (has("termguicolors"))
   set termguicolors
@@ -43,6 +44,9 @@ endif
 let g:molokai_original = 1
 silent! colorscheme molokai
 hi Comment guifg=#A1A1A1
+hi FoldColumn guifg=#B1B1B1
+hi Folded guifg=#B1B1B1
+
 
 " let g:airline_powerline_fonts = 1
 
@@ -108,6 +112,7 @@ autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 autocmd FileType go nmap <Leader>k <Plug>(go-doc)
 autocmd FileType go nmap <Leader>d <Plug>(go-describe)
 autocmd Filetype go nmap <Leader>i <Plug>(go-implements)
+autocmd Filetype go nmap <Leader>o <Plug>(go-referrers)
 autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
 
@@ -125,6 +130,8 @@ let g:go_auto_sameids = 0
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_rename_command='gopls'
+let g:go_referrers_mode = 'gopls'
+let g:go_implements_mode = 'gopls'
 
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
