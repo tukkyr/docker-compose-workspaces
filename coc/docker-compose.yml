@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  nvim-coc:
+    build:
+      context: .
+    init: true
+    volumes:
+      - history-vol:/history 
+    environment:
+      - HISTFILE=/history/.history
+
+volumes:
+  history-vol:
