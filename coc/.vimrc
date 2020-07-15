@@ -117,14 +117,14 @@ function! s:show_documentation()
 endfunction
 
 let g:go_list_type = 'quickfix'
-" let g:go_gopls_enabled = 1
-let g:go_gopls_enabled = 0
+let g:go_gopls_enabled = 1
+" let g:go_gopls_enabled = 0
 let g:go_info_mode='gopls'
 let g:go_def_mode='gopls'
 let g:go_def_mapping_enabled = 0
 let g:go_fmt_autosave = 0
 let g:go_mod_fmt_autosave = 0
-" let g:go_auto_type_info = 1
+let g:go_auto_type_info = 1
 let g:go_template_autocreate = 0
 let g:go_highlight_structs = 1 
 let g:go_highlight_methods = 1

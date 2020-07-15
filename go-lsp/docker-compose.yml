@@ -6,11 +6,9 @@ services:
       context: .
     init: true
     volumes:
-      - go-app:/app
       - history-vol:/history 
     environment:
       - HISTFILE=/history/.history
 
 volumes:
-  go-app:
   history-vol:

@@ -18,6 +18,8 @@ RUN wget https://github.com/neovim/neovim/releases/download/v0.4.3/nvim.appimage
  && ln -s $HOME/.vim $HOME/.config/nvim \
  && ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
 
+COPY coc-settings.json /root/.config/nvim
+
 ARG PROT_VER=3.12.3
 
 RUN go get -u google.golang.org/grpc \
@@ -56,6 +58,8 @@ RUN curl -fLo /usr/local/bin/firebase https://firebase.tools/bin/linux/latest \
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
  && apt-get install -y nodejs
+
+RUN yarn global add diagnostic-languageserver
 
 WORKDIR /root
 

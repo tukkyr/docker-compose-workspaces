@@ -1,6 +1,6 @@
 FROM node:buster
 
-RUN apt-get update && apt-get install -y isomd5sum python3 python3-pip python3-venv git vim curl jq gettext groff && rm -rf /var/lib/apt/lists/* && rm -rf /var/lib/apt/cache/*
+RUN apt-get update && apt-get install -y isomd5sum python3 python3-pip python3-venv git vim curl jq ack gettext groff && rm -rf /var/lib/apt/lists/* && rm -rf /var/lib/apt/cache/*
 
 RUN curl -o ${HOME}/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh \
  && mkdir -p ${HOME}/.vim/autoload && curl -o ${HOME}/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -48,7 +48,6 @@ RUN apt-get update \
  # && usermod -aG docker your-user \
  && rm -rf /var/lib/apt/cache/*
 
-COPY .vimrc /root
 
 ARG username
 ARG email
@@ -57,6 +56,8 @@ RUN set -u \
  && git config --global credential.helper cache \
  && git config --global user.name ${username} \
  && git config --global user.email ${email}
+
+COPY .vimrc /root
 
 WORKDIR /root/environment
 

@@ -1,7 +1,6 @@
 FROM golang:1.14-buster
 
-RUN apt-get update && apt-get install --no-install-recommends -y lsb-release peco tree vim jq ssh-client unzip graphviz rsync && rm -rf /var/lib/apt/lists/*
-
+RUN apt-get update && apt-get install --no-install-recommends -y ack-grep lsb-release peco tree vim jq ssh-client unzip graphviz rsync && rm -rf /var/lib/apt/lists/*
 COPY .bashrc /root
 
 RUN wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -O ${HOME}/.git-prompt.sh
@@ -15,7 +14,7 @@ RUN curl -fLo ${HOME}/.vim/autoload/plug.vim --create-dirs https://raw.githubuse
 
 WORKDIR /tmp
 
-ARG PROT_VER=3.12.0
+ARG PROT_VER=3.12.3
 
 RUN go get -u google.golang.org/grpc \
  && go get -u github.com/golang/protobuf/protoc-gen-go \
@@ -50,6 +49,16 @@ RUN apt-get update && apt-get install --no-install-recommends -y default-jre && 
 
 RUN curl -fLo /usr/local/bin/firebase https://firebase.tools/bin/linux/latest \
  && chmod +x /usr/local/bin/firebase
+
+RUN wget https://github.com/neovim/neovim/releases/download/v0.4.3/nvim.appimage \
+ && chmod u+x nvim.appimage \
+ && ./nvim.appimage --appimage-extract \
+ && echo 'export PATH=$PATH:/tmp/squashfs-root/usr/bin' >> $HOME/.bashrc
+# && mkdir -p $HOME/.config \
+# && ln -s $HOME/.vim $HOME/.config/nvim \
+# && ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
+
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 
 WORKDIR /app
 

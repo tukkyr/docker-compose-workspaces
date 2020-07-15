@@ -8,7 +8,6 @@ Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'easymotion/vim-easymotion'
-Plug 'jacoborus/tender.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
@@ -18,6 +17,9 @@ Plug 'fatih/vim-go'
 Plug 'fatih/molokai'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'mileszs/ack.vim'
 
 call plug#end()
 filetype plugin indent on
@@ -29,25 +31,13 @@ set nowrap
 set foldmethod=indent
 set foldlevel=5
 
-if (has("termguicolors"))
-  set termguicolors
- silent! colorscheme tender
- let g:airline_theme='tenderplus'
-endif
-if &term == "screen"
- set t_Co=256
- if (has("termguicolors"))
-   set notermguicolors
- endif
-endif
-
 let g:molokai_original = 1
 silent! colorscheme molokai
 hi Comment guifg=#A1A1A1
 hi FoldColumn guifg=#B1B1B1
 hi Folded guifg=#B1B1B1
 
-
+let g:airline_theme='jellybeans'
 " let g:airline_powerline_fonts = 1
 
 let g:airline#extensions#tabline#enabled = 1
@@ -95,6 +85,13 @@ nnoremap <leader>n :cnext<CR>
 nnoremap <leader>p :cprevious<CR>
 imap <C-j> <C-x><C-o>
 
+augroup javascript_folding
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+augroup END
+
+let g:javascript_plugin_jsdoc = 1
+
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
   let l:file = expand('%')
@@ -120,8 +117,8 @@ autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 soft
 autocmd BufNewFile,BufRead *.md setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 let g:go_auto_type_info = 1
-let g:go_list_type = "quickfix"
-let g:go_fmt_command = "goimports"
+let g:go_list_type = 'quickfix'
+let g:go_fmt_command = 'goimports'
 let g:go_code_completion_enabled = 1
 let g:go_def_mapping_enabled = 1
 let g:go_def_keywordprg_enable = 0
@@ -150,3 +147,5 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 runtime macros/matchit.vim
 let b:match_words = "if:endif,foreach:endforeach,\<begin\>:\<end\>"
+
+let g:ctrlp_map = '<leader><space>'
