@@ -27,7 +27,8 @@ set nrformats=
 set encoding=utf-8
 set nowrap
 set foldmethod=indent
-set foldlevel=5
+
+autocmd BufRead * normal zR
 
 let g:molokai_original = 1
 " silent! colorscheme tender
@@ -117,16 +118,16 @@ function! s:show_documentation()
 endfunction
 
 let g:go_list_type = 'quickfix'
-let g:go_gopls_enabled = 1
-" let g:go_gopls_enabled = 0
+" let g:go_gopls_enabled = 1
+let g:go_gopls_enabled = 0
 let g:go_info_mode='gopls'
 let g:go_def_mode='gopls'
 let g:go_def_mapping_enabled = 0
 let g:go_fmt_autosave = 0
 let g:go_mod_fmt_autosave = 0
-let g:go_auto_type_info = 1
+" let g:go_auto_type_info = 1
 let g:go_template_autocreate = 0
-let g:go_highlight_structs = 1 
+let g:go_highlight_structs = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_operators = 1
@@ -140,3 +141,13 @@ imap <C-l> <Plug>(coc-snippets-expand)
 " let g:coc_snippet_prev = '<c-k>'
 
 nmap s <Plug>(easymotion-overwin-f)
+
+set undofile
+
+if !isdirectory(expand("$HOME/.vim/undodir"))
+  call mkdir(expand("$HOME/.vim/undodir"), "p")
+endif
+
+set undodir=$HOME/.vim/undodir
+
+set wildmenu
