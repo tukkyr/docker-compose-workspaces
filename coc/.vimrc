@@ -27,6 +27,7 @@ set nrformats=
 set encoding=utf-8
 set nowrap
 set foldmethod=indent
+set foldlevel=5
 
 autocmd BufRead * normal zR
 
@@ -104,7 +105,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 command! -nargs=0 Format :call CocAction('format')
 
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-autocmd BufWritePre *.go :Format
+" autocmd BufWritePre *.go :Format
 
 nnoremap <silent> <C-k> :call <SID>show_documentation()<CR>
 nmap <leader>rn <Plug>(coc-rename)

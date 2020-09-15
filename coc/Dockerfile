@@ -20,7 +20,7 @@ RUN wget https://github.com/neovim/neovim/releases/download/v0.4.3/nvim.appimage
 
 COPY coc-settings.json /root/.config/nvim
 
-ARG PROT_VER=3.12.3
+ARG PROT_VER=3.13.0
 
 RUN go get -u google.golang.org/grpc \
  && go get -u github.com/golang/protobuf/protoc-gen-go \
@@ -49,7 +49,8 @@ RUN set -u \
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"\
  && echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
  && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
- && apt-get update -y && apt-get install google-cloud-sdk -y
+ && apt-get update -y && apt-get install google-cloud-sdk -y \
+ && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install --no-install-recommends -y default-jre && rm -rf /var/lib/apt/lists/*
 
@@ -57,10 +58,17 @@ RUN curl -fLo /usr/local/bin/firebase https://firebase.tools/bin/linux/latest \
  && chmod +x /usr/local/bin/firebase
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
- && apt-get install -y nodejs
+ && apt-get install -y nodejs \
+ && rm -rf /var/lib/apt/lists/*
 
-RUN yarn global add diagnostic-languageserver
+RUN npm install -g yarn \
+ && yarn global add diagnostic-languageserver
 
 WORKDIR /root
+
+RUN apt-get update && apt-get install -y python3-pip python-pip \
+ && pip3 install neovim \
+ && pip install neovim \
+ && rm -rf /var/lib/apt/lists/*
 
 CMD ["sleep", "infinity"]
