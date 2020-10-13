@@ -1,9 +1,9 @@
- coc-snippets 2.1.28 ~/.config/coc/extensions/node_modules/coc-snippets
- coc-prettier 1.1.14 ~/.config/coc/extensions/node_modules/coc-prettier
- coc-eslint 1.2.7 ~/.config/coc/extensions/node_modules/coc-eslint
- coc-vetur 1.1.10 ~/.config/coc/extensions/node_modules/coc-vetur
- coc-tsserver 1.5.2 ~/.config/coc/extensions/node_modules/coc-tsserver
- coc-python 1.2.12 ~/.config/coc/extensions/node_modules/coc-python
- coc-pyright 1.1.44 ~/.config/coc/extensions/node_modules/coc-pyright
- coc-omnisharp 0.0.26 ~/.config/coc/extensions/node_modules/coc-omnisharp
- coc-go 0.8.0 ~/.config/coc/extensions/node_modules/coc-go
+coc-spell-checker 1.2.0 ~/.config/coc/extensions/node_modules/coc-spell-checker
+coc-snippets 2.2.0 ~/.config/coc/extensions/node_modules/coc-snippets
+coc-prettier 1.1.17 ~/.config/coc/extensions/node_modules/coc-prettier
+coc-eslint 1.3.0 ~/.config/coc/extensions/node_modules/coc-eslint
+coc-diagnostic 0.8.3 ~/.config/coc/extensions/node_modules/coc-diagnostic
+coc-actions 1.4.1 ~/.config/coc/extensions/node_modules/coc-actions
+coc-vetur 1.1.13 ~/.config/coc/extensions/node_modules/coc-vetur
+coc-json 1.3.1 ~/.config/coc/extensions/node_modules/coc-json
+coc-go 0.11.0 ~/.config/coc/extensions/node_modules/coc-go

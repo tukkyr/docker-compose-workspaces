@@ -5,19 +5,24 @@ call plug#begin('~/.vim/plugged')
 Plug 'VundleVim/Vundle.vim'
 Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
 Plug 'enricobacis/vim-airline-clock'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'ctrlpvim/ctrlp.vim'
+
 Plug 'mattn/emmet-vim'
-Plug 'tpope/vim-repeat'
+
 Plug 'mileszs/ack.vim'
+
+Plug 'tpope/vim-fugitive'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-repeat'
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'jacoborus/tender.vim'
-Plug 'fatih/molokai'
 Plug 'fatih/vim-go'
+
+Plug 'fatih/molokai'
 
 call plug#end()
 filetype plugin indent on
@@ -82,7 +87,7 @@ set backspace=indent,eol,start
 
 " let g:EasyMotion_do_mapping=0
 
-nnoremap <leader>a :cclose<CR>
+nnoremap <leader>c :cclose<CR>
 nnoremap <leader>n :cnext<CR>
 nnoremap <leader>p :cprevious<CR>
 
@@ -152,3 +157,10 @@ endif
 set undodir=$HOME/.vim/undodir
 
 set wildmenu
+
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@

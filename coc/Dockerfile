@@ -1,4 +1,4 @@
-FROM golang:1.14-buster
+FROM golang:1.15-buster
 
 RUN apt-get update && apt-get install --no-install-recommends -y ack-grep lsb-release peco tree jq ssh-client unzip graphviz rsync && rm -rf /var/lib/apt/lists/*
 
@@ -26,6 +26,7 @@ RUN go get -u google.golang.org/grpc \
  && go get -u github.com/golang/protobuf/protoc-gen-go \
  && go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway \
  && go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
+ && GO111MODULE=off go get github.com/oxequa/realize \
  && wget https://github.com/protocolbuffers/protobuf/releases/download/v${PROT_VER}/protoc-${PROT_VER}-linux-x86_64.zip \
  && mkdir build \
  && unzip protoc-${PROT_VER}-linux-x86_64.zip -d build \
