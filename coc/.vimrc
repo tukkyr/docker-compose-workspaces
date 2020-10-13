@@ -24,6 +24,8 @@ Plug 'fatih/vim-go'
 
 Plug 'fatih/molokai'
 
+Plug 'jparise/vim-graphql'
+
 call plug#end()
 filetype plugin indent on
 syntax enable
@@ -124,14 +126,12 @@ function! s:show_documentation()
 endfunction
 
 let g:go_list_type = 'quickfix'
-" let g:go_gopls_enabled = 1
 let g:go_gopls_enabled = 0
 let g:go_info_mode='gopls'
 let g:go_def_mode='gopls'
 let g:go_def_mapping_enabled = 0
 let g:go_fmt_autosave = 0
 let g:go_mod_fmt_autosave = 0
-" let g:go_auto_type_info = 1
 let g:go_template_autocreate = 0
 let g:go_highlight_structs = 1
 let g:go_highlight_methods = 1
@@ -158,9 +158,14 @@ set undodir=$HOME/.vim/undodir
 
 set wildmenu
 
-" Remap for do codeAction of selected region
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
 endfunction
 xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
 nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
