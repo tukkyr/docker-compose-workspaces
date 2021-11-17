@@ -1,4 +1,4 @@
-FROM golang:1.15-buster
+FROM golang:1.17-buster
 
 RUN apt-get update && apt-get install --no-install-recommends -y ack-grep lsb-release peco tree jq ssh-client unzip graphviz rsync && rm -rf /var/lib/apt/lists/*
 
@@ -20,10 +20,11 @@ RUN wget https://github.com/neovim/neovim/releases/download/v0.4.3/nvim.appimage
 
 COPY coc-settings.json /root/.config/nvim
 
-ARG PROT_VER=3.13.0
+ARG PROT_VER=3.15.6
 
 RUN go get -u google.golang.org/grpc \
  && go get -u github.com/golang/protobuf/protoc-gen-go \
+ && go get -u google.golang.org/grpc/cmd/protoc-gen-go-grpc \
  && go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway \
  && go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
  && GO111MODULE=off go get github.com/oxequa/realize \
@@ -58,7 +59,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y default-jre && 
 RUN curl -fLo /usr/local/bin/firebase https://firebase.tools/bin/linux/latest \
  && chmod +x /usr/local/bin/firebase
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+ARG NODE_VER=16
+
+RUN curl -sL https://deb.nodesource.com/setup_${NODE_VER}.x | bash - \
  && apt-get install -y nodejs \
  && rm -rf /var/lib/apt/lists/*
 
