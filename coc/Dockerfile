@@ -14,13 +14,14 @@ RUN wget https://github.com/neovim/neovim/releases/download/v0.4.3/nvim.appimage
  && chmod u+x nvim.appimage \
  && ./nvim.appimage --appimage-extract \
  && echo 'export PATH=$PATH:$HOME/squashfs-root/usr/bin' >> $HOME/.bashrc \
+ && echo 'export GIT_PAGER="LESSCHARSET=utf-8 less"' \
  && mkdir -p $HOME/.config \
  && ln -s $HOME/.vim $HOME/.config/nvim \
  && ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
 
 COPY coc-settings.json /root/.config/nvim
 
-ARG PROT_VER=3.15.6
+ARG PROT_VER=3.19.1
 
 RUN go get -u google.golang.org/grpc \
  && go get -u github.com/golang/protobuf/protoc-gen-go \
